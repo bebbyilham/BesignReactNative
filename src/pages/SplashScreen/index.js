@@ -13,7 +13,10 @@ const SplashScreen = () => {
       }}>
       <Logo />
       <View style={{height: 30}} />
-      <Text style={{fontSize: 32, color: '#020202'}}>besign</Text>
+      <Text
+        style={{fontSize: 32, color: '#020202', fontFamily: 'Poppins-Medium'}}>
+        besign
+      </Text>
     </View>
   );
 };
