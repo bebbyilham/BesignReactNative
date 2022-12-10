@@ -7,6 +7,8 @@ import IcProfileOff from './ic-profile-off.svg';
 import IcProfileOn from './ic-profile-on.svg';
 import IcDashboardOff from './ic-dashboard-off.svg';
 import IcDashboardOn from './ic-dashboard-on.svg';
+import IcStarOn from './ic-star-on.svg';
+import IcStarOff from './ic-star-off.svg';
 
 export {
   IcBack,
@@ -18,4 +20,6 @@ export {
   IcProfileOn,
   IcDashboardOn,
   IcDashboardOff,
+  IcStarOn,
+  IcStarOff,
 };
