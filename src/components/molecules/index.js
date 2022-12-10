@@ -5,6 +5,8 @@ import HomeTabSection from './HomeTabSection';
 import HomeProfile from './HomeProfile';
 import Rating from './Rating';
 import ItemListA from './ItemListA';
+import ProfileTabSection from './ProfileTabSection';
+import ItemListMenu from './ItemListMenu';
 
 export {
   Header,
@@ -14,4 +16,6 @@ export {
   HomeProfile,
   Rating,
   ItemListA,
+  ProfileTabSection,
+  ItemListMenu,
 };

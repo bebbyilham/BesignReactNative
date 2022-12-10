@@ -9,6 +9,7 @@ import IcDashboardOff from './ic-dashboard-off.svg';
 import IcDashboardOn from './ic-dashboard-on.svg';
 import IcStarOn from './ic-star-on.svg';
 import IcStarOff from './ic-star-off.svg';
+import IcNext from './ic-next.svg';
 
 export {
   IcBack,
@@ -22,4 +23,5 @@ export {
   IcDashboardOff,
   IcStarOn,
   IcStarOff,
+  IcNext,
 };

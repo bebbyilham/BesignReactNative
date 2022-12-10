@@ -1,9 +1,17 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {Header} from '../../components/molecules';
 import {Button, Gap, TextInput} from '../../components';
 
 const SignIn = ({navigation}) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = () => {
+    console.log('email', email);
+    console.log('password', password);
+  };
+
   return (
     <View style={styles.page}>
       <Header title="Sign In" subTitle="Please sign in" />
@@ -11,11 +19,19 @@ const SignIn = ({navigation}) => {
         <TextInput
           label="Email Address"
           placeholder="Type your email address"
+          value={email}
+          onChangeText={value => setEmail(value)}
         />
         <Gap height={16} />
-        <TextInput label="Password" placeholder="Type your password" />
+        <TextInput
+          label="Password"
+          placeholder="Type your password"
+          value={password}
+          onChangeText={value => setPassword(value)}
+          secureTextEntry
+        />
         <Gap height={24} />
-        <Button text="Sign In" />
+        <Button text="Sign In" onPress={onSubmit} />
         <Gap height={12} />
         <Button
           text="Create New Account"

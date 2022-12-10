@@ -14,6 +14,7 @@ import {
   ImageDummy3,
   ImageDummy4,
 } from '../../../assets';
+import ItemListMenu from '../ItemListMenu';
 
 const renderTabBar = props => (
   <TabBar
@@ -42,57 +43,43 @@ const renderTabBar = props => (
   />
 );
 
-const New = () => {
+const Account = () => {
   return (
     <ScrollView>
-      <View style={{paddingTop: 8}}>
-        <ItemListA image={ImageDummy1} />
-        <ItemListA image={ImageDummy2} />
-        <ItemListA image={ImageDummy3} />
-        <ItemListA image={ImageDummy4} />
+      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
+        <ItemListMenu text="Edit Profile" />
+        <ItemListMenu text="Home Address" />
+        <ItemListMenu text="Security" />
+        <ItemListMenu text="Payments" />
       </View>
     </ScrollView>
   );
 };
 
-const Popular = () => {
+const About = () => {
   return (
     <ScrollView>
-      <View style={{paddingTop: 8}}>
-        <ItemListA image={ImageDummy4} />
-        <ItemListA image={ImageDummy1} />
-        <ItemListA image={ImageDummy2} />
-        <ItemListA image={ImageDummy3} />
-      </View>
-    </ScrollView>
-  );
-};
-
-const Recommended = () => {
-  return (
-    <ScrollView>
-      <View style={{paddingTop: 8}}>
-        <ItemListA image={ImageDummy3} />
-        <ItemListA image={ImageDummy2} />
-        <ItemListA image={ImageDummy4} />
+      <View style={{paddingTop: 8, paddingHorizontal: 24}}>
+        <ItemListMenu text="Rate App" />
+        <ItemListMenu text="Help Center" />
+        <ItemListMenu text="Privacy & Policy" />
+        <ItemListMenu text="Terms & Conditions" />
       </View>
     </ScrollView>
   );
 };
 
 const renderScene = SceneMap({
-  1: New,
-  2: Popular,
-  3: Recommended,
+  1: Account,
+  2: About,
 });
-const HomeTabSection = () => {
+const ProfileTabSection = () => {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    {key: '1', title: 'New'},
-    {key: '2', title: 'Popular'},
-    {key: '3', title: 'Recommended'},
+    {key: '1', title: 'Account'},
+    {key: '2', title: 'About'},
   ]);
   return (
     <TabView
@@ -106,6 +93,6 @@ const HomeTabSection = () => {
   );
 };
 
-export default HomeTabSection;
+export default ProfileTabSection;
 
 const styles = StyleSheet.create({});
