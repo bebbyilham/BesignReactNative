@@ -3,6 +3,8 @@ import React from 'react';
 import {Button, Gap, Header, Select, TextInput} from '../../components';
 import {useForm} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
+const Axios = require('axios').default;
+import {API_HOST} from '@env';
 
 const SignUpAddress = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -22,7 +24,15 @@ const SignUpAddress = ({navigation}) => {
       ...registerReducer,
     };
     console.log('data register:', data);
-    //  navigation.replace('SuccessSignUp');
+    console.log('ENV:', API_HOST);
+    Axios.post(`${API_HOST}/api/register`, data)
+      .then(res => {
+        console.log('data success :', res.data);
+        navigation.replace('SuccessSignUp');
+      })
+      .catch(err => {
+        console.log('error:', err);
+      });
   };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
