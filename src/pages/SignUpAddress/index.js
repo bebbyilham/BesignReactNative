@@ -1,8 +1,9 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Gap, Header, Select, TextInput} from '../../components';
 import {useForm} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
+import {showMessage, hideMessage} from 'react-native-flash-message';
 const Axios = require('axios').default;
 import {API_HOST} from '@env';
 
@@ -27,12 +28,22 @@ const SignUpAddress = ({navigation}) => {
     console.log('ENV:', API_HOST);
     Axios.post(`${API_HOST}/api/register`, data)
       .then(res => {
-        console.log('data success :', res.data);
+        // console.log('data success :', res.data);
+        showToast('Register Success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch(err => {
-        console.log('error:', err);
+        // console.log('error:', err.response.data.message);
+        showToast(err?.response?.data?.message);
       });
+  };
+
+  const showToast = (message, type) => {
+    showMessage({
+      message,
+      type: type === 'success' ? 'success' : 'danger',
+      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
+    });
   };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
