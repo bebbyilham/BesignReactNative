@@ -7,6 +7,7 @@ import Rating from './Rating';
 import ItemListA from './ItemListA';
 import ProfileTabSection from './ProfileTabSection';
 import ItemListMenu from './ItemListMenu';
+import Loading from './Loading';
 
 export {
   Header,
@@ -18,4 +19,5 @@ export {
   ItemListA,
   ProfileTabSection,
   ItemListMenu,
+  Loading,
 };

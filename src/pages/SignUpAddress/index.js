@@ -24,16 +24,19 @@ const SignUpAddress = ({navigation}) => {
       ...form,
       ...registerReducer,
     };
-    console.log('data register:', data);
-    console.log('ENV:', API_HOST);
+    dispatch({type: 'SET_LOADING', value: true});
+    // console.log('data register:', data);
+    // console.log('ENV:', API_HOST);
     Axios.post(`${API_HOST}/api/register`, data)
       .then(res => {
         // console.log('data success :', res.data);
+        dispatch({type: 'SET_LOADING', value: false});
         showToast('Register Success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch(err => {
         // console.log('error:', err.response.data.message);
+        dispatch({type: 'SET_LOADING', value: false});
         showToast(err?.response?.data?.message);
       });
   };
