@@ -1,9 +1,8 @@
 import {ScrollView, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {Button, Gap, Header, Select, TextInput} from '../../components';
-import {useForm} from '../../utils';
+import {useForm, showMessage} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
-import {showMessage, hideMessage} from 'react-native-flash-message';
 const Axios = require('axios').default;
 import {API_HOST} from '@env';
 
@@ -16,7 +15,7 @@ const SignUpAddress = ({navigation}) => {
   });
 
   const dispatch = useDispatch();
-  const registerReducer = useSelector(state => state.registerReducer);
+  const {registerReducer, photoReducer} = useSelector(state => state);
 
   const onSubmit = () => {
     console.log('form: ', form);
@@ -30,23 +29,35 @@ const SignUpAddress = ({navigation}) => {
     Axios.post(`${API_HOST}/api/register`, data)
       .then(res => {
         console.log('data success :', res.data);
+        if (photoReducer.isUploadPhoto) {
+          const photoForUpload = new FormData();
+          photoForUpload.append('file', photoReducer);
+          Axios.post(
+            'http://192.168.10.3:8000/api/user/photo',
+            photoForUpload,
+            {
+              headers: {
+                Authorization: `${res.data.data.token_type}${res.data.data.access_token}`,
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+            .then(resUpload => {
+              console.log('success upload:', resUpload);
+            })
+            .catch(err => {
+              showMessage('Upload photo tidak berhasil');
+            });
+        }
         dispatch({type: 'SET_LOADING', value: false});
-        showToast('Register Success', 'success');
+        showMessage('Register Success', 'success');
         navigation.replace('SuccessSignUp');
       })
       .catch(err => {
         console.log('error:', err.response.data.message);
         dispatch({type: 'SET_LOADING', value: false});
-        showToast(err?.response?.data?.message);
+        showMessage(err?.response?.data?.message);
       });
-  };
-
-  const showToast = (message, type) => {
-    showMessage({
-      message,
-      type: type === 'success' ? 'success' : 'danger',
-      backgroundColor: type === 'success' ? '#1ABC9C' : '#D9435E',
-    });
   };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
