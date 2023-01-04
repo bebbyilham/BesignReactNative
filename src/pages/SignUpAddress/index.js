@@ -5,6 +5,7 @@ import {useForm, showMessage} from '../../utils';
 import {useDispatch, useSelector} from 'react-redux';
 const Axios = require('axios').default;
 import {API_HOST} from '@env';
+import {setLoading, signUpAction} from '../../redux/action';
 
 const SignUpAddress = ({navigation}) => {
   const [form, setForm] = useForm({
@@ -23,41 +24,10 @@ const SignUpAddress = ({navigation}) => {
       ...form,
       ...registerReducer,
     };
-    dispatch({type: 'SET_LOADING', value: true});
+    dispatch(setLoading(true));
+    dispatch(signUpAction(data, photoReducer, navigation));
     // console.log('data register:', data);
     // console.log('ENV:', API_HOST);
-    Axios.post(`${API_HOST}/api/register`, data)
-      .then(res => {
-        console.log('data success :', res.data);
-        if (photoReducer.isUploadPhoto) {
-          const photoForUpload = new FormData();
-          photoForUpload.append('file', photoReducer);
-          Axios.post(
-            'http://192.168.10.3:8000/api/user/photo',
-            photoForUpload,
-            {
-              headers: {
-                Authorization: `${res.data.data.token_type}${res.data.data.access_token}`,
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          )
-            .then(resUpload => {
-              console.log('success upload:', resUpload);
-            })
-            .catch(err => {
-              showMessage('Upload photo tidak berhasil');
-            });
-        }
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage('Register Success', 'success');
-        navigation.replace('SuccessSignUp');
-      })
-      .catch(err => {
-        console.log('error:', err.response.data.message);
-        dispatch({type: 'SET_LOADING', value: false});
-        showMessage(err?.response?.data?.message);
-      });
   };
   return (
     <ScrollView contentContainerStyle={{flexGrow: 1}}>
