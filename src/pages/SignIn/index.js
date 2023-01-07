@@ -3,6 +3,9 @@ import React, {useState} from 'react';
 import {Header} from '../../components/molecules';
 import {Button, Gap, TextInput} from '../../components';
 import {useForm} from '../../utils';
+import {useDispatch} from 'react-redux';
+import {signInAction} from '../../redux/action/auth';
+import {setLoading} from '../../redux/action/global';
 // import {Axios} from 'axios';
 const Axios = require('axios').default;
 
@@ -13,16 +16,10 @@ const SignIn = ({navigation}) => {
     email: '',
     password: '',
   });
+  const dispatch = useDispatch();
 
   const onSubmit = () => {
-    console.log('form: ', form);
-    Axios.post('http://192.168.100.29:8000/api/login', form)
-      .then(res => {
-        console.log('success', res);
-      })
-      .catch(err => {
-        console.log('error', err);
-      });
+    dispatch(signInAction(form, navigation));
   };
 
   return (
