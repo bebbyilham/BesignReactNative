@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Header} from '../../components/molecules';
 import {Button, Gap, TextInput} from '../../components';
-import {useForm} from '../../utils';
+import {getData, useForm} from '../../utils';
 import {useDispatch} from 'react-redux';
 import {signInAction} from '../../redux/action/auth';
 import {setLoading} from '../../redux/action/global';
