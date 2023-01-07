@@ -60,7 +60,7 @@ const SignUp = ({navigation}) => {
         <Header
           title="Sign Up"
           subTitle="Register your account"
-          onBack={() => {}}
+          onBack={() => navigation.goBack()}
         />
         <View style={styles.container}>
           <View style={styles.photo}>
