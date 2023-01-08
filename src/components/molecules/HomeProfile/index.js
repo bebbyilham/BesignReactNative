@@ -5,17 +5,21 @@ import {getData} from '../../../utils';
 
 const HomeProfile = () => {
   const [photo, setPhoto] = useState(ProfileDummy);
+  const [userProfile, setUserProfile] = useState({});
   useEffect(() => {
     getData('userProfile').then(res => {
       console.log('user profile:', res);
       setPhoto({uri: res.profile_photo_url});
+    });
+    getData('userProfile').then(res => {
+      setUserProfile(res);
     });
   }, []);
   return (
     <View style={styles.profileContainer}>
       <View>
         <Text style={styles.appName}>besign</Text>
-        <Text style={styles.desc}>Welcome,</Text>
+        <Text style={styles.desc}>Welcome, {userProfile.name}</Text>
       </View>
       <Image source={photo} styles={styles.profile} />
     </View>
