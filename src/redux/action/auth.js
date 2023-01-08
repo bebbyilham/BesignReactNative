@@ -7,7 +7,8 @@ export const signUpAction =
   (dataRegister, photoReducer, navigation) => dispatch => {
     Axios.post(`${API_HOST}/api/register`, dataRegister)
       .then(res => {
-        // console.log('data success :', res.data);
+        console.log('data success :', res.data);
+        console.log('data appi host :'`${API_HOST}`);
         //data user
         const profile = res.data.data.user;
 
