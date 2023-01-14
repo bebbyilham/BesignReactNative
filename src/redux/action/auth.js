@@ -8,12 +8,12 @@ export const signUpAction =
     Axios.post(`${API_HOST}/api/register`, dataRegister)
       .then(res => {
         console.log('data success :', res.data);
-        console.log('data appi host :'`${API_HOST}`);
+        // console.log('data appi host :'`${API_HOST}`);
         //data user
         const profile = res.data.data.user;
 
         //data token
-        const token = `${res.data.data.token_type}${res.data.data.access_token}`;
+        const token = `${res.data.data.token_type} ${res.data.data.access_token}`;
         storeData('token', {
           value: token,
         });
@@ -54,7 +54,8 @@ export const signInAction = (form, navigation) => dispatch => {
   dispatch(setLoading(true));
   Axios.post(`${API_HOST}/api/login`, form)
     .then(res => {
-      const token = `${res.data.data.token_type}${res.data.data.access_token}`;
+      // console.log('data api host :'`${API_HOST}`);
+      const token = `${res.data.data.token_type} ${res.data.data.access_token}`;
       const profile = res.data.data.user;
       dispatch(setLoading(false));
       storeData('token', {
@@ -64,6 +65,7 @@ export const signInAction = (form, navigation) => dispatch => {
       navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
     })
     .catch(err => {
+      console.log('data appi host :'`${API_HOST}`);
       dispatch(setLoading(false));
       showMessage(err?.response?.data?.message);
     });
