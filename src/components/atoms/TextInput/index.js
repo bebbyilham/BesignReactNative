@@ -1,13 +1,26 @@
 import {StyleSheet, Text, View, TextInput as TextInputRN} from 'react-native';
 import React from 'react';
 
-const TextInput = ({label, placeholder, ...restProps}) => {
+const TextInput = ({
+  label,
+  placeholder,
+  value,
+  onChangeText,
+  secureTextEntry,
+  disable,
+  ...restProps
+}) => {
   return (
     <View>
       <Text style={styles.label}>{label}</Text>
       <TextInputRN
         style={styles.input}
         placeholder={placeholder}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
+        editable={!disable}
+        selectTextOnFocus={!disable}
         {...restProps}
       />
     </View>

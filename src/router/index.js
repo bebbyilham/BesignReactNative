@@ -11,6 +11,7 @@ import {
   SignUpAddress,
   SplashScreen,
   SuccessSignUp,
+  ChangePassword,
 } from '../pages';
 import {BottomNavigator} from '../components';
 const Stack = createNativeStackNavigator();
@@ -70,6 +71,11 @@ const Router = () => {
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

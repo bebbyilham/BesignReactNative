@@ -7,6 +7,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Profile from './Profile';
 import EditProfile from './EditProfile';
+import ChangePassword from './ChangePassword';
 
 export {
   SplashScreen,
@@ -18,4 +19,5 @@ export {
   Dashboard,
   Profile,
   EditProfile,
+  ChangePassword,
 };

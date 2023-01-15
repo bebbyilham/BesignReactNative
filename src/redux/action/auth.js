@@ -65,8 +65,9 @@ export const signInAction = (form, navigation) => dispatch => {
       navigation.reset({index: 0, routes: [{name: 'MainApp'}]});
     })
     .catch(err => {
-      console.log('data appi host :'`${API_HOST}`);
+      // console.log('data appi host :'`${API_HOST}`);
+      console.log(err?.response?.data?.data?.message);
       dispatch(setLoading(false));
-      showMessage(err?.response?.data?.message);
+      showMessage(err?.response?.data?.data?.message);
     });
 };
