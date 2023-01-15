@@ -1,25 +1,39 @@
+import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import React from 'react';
-import {ImageDummy1, ImageDummy2, ImageDummy3, ImageDummy4} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
 import {
   DashboardCard,
+  Gap,
   HomeProfile,
   HomeTabSection,
-} from '../../components/molecules';
-import {Gap} from '../../components';
+} from '../../components';
+import {getFoodData} from '../../redux/action';
 
-const Home = () => {
+const Home = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {food} = useSelector(state => state.homeReducer);
+
+  useEffect(() => {
+    dispatch(getFoodData());
+  }, []);
   return (
     <View style={styles.page}>
       <HomeProfile />
       <View>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <View style={styles.dashboardCardContainer}>
+          <View style={styles.dashboarCardContainer}>
             <Gap width={24} />
-            <DashboardCard image={ImageDummy1} />
-            <DashboardCard image={ImageDummy2} />
-            <DashboardCard image={ImageDummy3} />
-            <DashboardCard image={ImageDummy4} />
+            {food.map(itemFood => {
+              return (
+                <DashboardCard
+                  key={itemFood.id}
+                  name={itemFood.name}
+                  image={{uri: itemFood.picturePath}}
+                  rating={itemFood.rate}
+                  onPress={() => navigation.navigate('ItemDetail', itemFood)}
+                />
+              );
+            })}
           </View>
         </ScrollView>
       </View>
@@ -34,6 +48,6 @@ export default Home;
 
 const styles = StyleSheet.create({
   page: {flex: 1},
-  dashboardCardContainer: {flexDirection: 'row', marginVertical: 24},
+  dashboarCardContainer: {flexDirection: 'row', marginVertical: 24},
   tabContainer: {flex: 1},
 });

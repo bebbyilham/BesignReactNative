@@ -12,6 +12,7 @@ import {
   SplashScreen,
   SuccessSignUp,
   ChangePassword,
+  ItemDetail,
 } from '../pages';
 import {BottomNavigator} from '../components';
 const Stack = createNativeStackNavigator();
@@ -76,6 +77,11 @@ const Router = () => {
       <Stack.Screen
         name="ChangePassword"
         component={ChangePassword}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ItemDetail"
+        component={ItemDetail}
         options={{headerShown: false}}
       />
     </Stack.Navigator>
